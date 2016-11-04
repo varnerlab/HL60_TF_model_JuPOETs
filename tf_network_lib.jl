@@ -59,7 +59,7 @@ function objective_function(parameter_array)
   end
 
   # how many objectives do we have?
-  obj_array = BIG*ones(12,1)
+  obj_array = BIG*ones(13,1)
 
   # Call simulation routine -
   # (run the model to SS, and then set the ICs to the SS for this parameter set)

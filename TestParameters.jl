@@ -5,7 +5,7 @@ include("Include.jl")
 data_dictionary = DataDictionary(0.0,0.0,0.0);
 
 # Load the parameter array -
-parameter_array = readdlm("./parameter_best_v1.dat")
+parameter_array = readdlm("./parameter_best_v1.dat.1")
 
 # Update data dictionary to match new parameters before calculating obj
 parameter_mapping_array = data_dictionary["parameter_name_mapping_array"]

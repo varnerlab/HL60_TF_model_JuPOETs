@@ -20,3 +20,7 @@ using PyCall
 
 # Plotting -
 using PyPlot
+include("PlotLib.jl")
+
+# Required by simple ensemble -
+using Sobol

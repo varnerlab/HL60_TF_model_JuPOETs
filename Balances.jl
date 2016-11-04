@@ -68,6 +68,10 @@ function Balances(t,x,data_dictionary)
   # Evaluate the balance equations -
   dxdt_array = stoichiometric_matrix*txtl_rate_array+degradation_matrix*degradation_rate_array+mugmax*dilution_matrix*x+background_transcription_rate_array+input_array
 
+  # correct for trigger and cRAF dilution -
+  dxdt_array[53] = 0.0;
+  dxdt_array[54] = 0.0;
+
   # return -
   return dxdt_array
 end

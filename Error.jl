@@ -25,7 +25,7 @@ function Error(experimental_data_array,simulation_time_array,simulation_state_ar
   initial_value_term = ((interpolated_simulated_trajectory[1] - initial_concentration)^2);
 
   # Compute the scale term -
-  simulated_fold_change = (interpolated_simulated_trajectory)./(initial_value_term);
+  simulated_fold_change = (interpolated_simulated_trajectory)./(interpolated_simulated_trajectory[1]);
   scale_term = sum((simulated_fold_change - experimental_data_array[:,2]).^2);
 
   # @show (interpolated_simulated_trajectory[1],initial_concentration,interpolated_simulated_trajectory[end],species_symbol)

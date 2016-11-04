@@ -8,6 +8,13 @@
       "error_function":"Error_E2F"
     },
     {
+      "experiment_id":"40e575d8-54e3-44ae-ba15-8f8e356ff718",
+      "data_file":"./data/P21-WTHL60-Synthetic.txt",
+      "output_index":"49",
+      "protein_symbol":"protein_gene_P21",
+      "error_function":"Error"
+    },
+    {
       "experiment_id":"e29e90f9-d137-41ea-8a04-80689cac0b95",
       "data_file":"./data/GiF1-WTHL60.txt",
       "output_index":"45",

@@ -589,11 +589,10 @@ function DataDictionary(time_start::Float64,time_stop::Float64,time_step_size::F
 	background_copy_number_dictionary["protein_gene_EGR1"] = 100.0
 	background_copy_number_dictionary["protein_gene_GFI1"] = 100.0
 	background_copy_number_dictionary["protein_gene_OCT1"] = 100.0
-	background_copy_number_dictionary["protein_gene_P21"] = 100.0
+	background_copy_number_dictionary["protein_gene_P21"] = 1000.0
 	background_copy_number_dictionary["protein_gene_P47Phox"] = 100.0
 	background_copy_number_dictionary["protein_gene_PPARg"] = 100.0
-	background_copy_number_dictionary["protein_gene_PU1"] = 100.0
-	background_copy_number_dictionary["protein_gene_PU1"] = 100.0
+	background_copy_number_dictionary["protein_gene_PU1"] = 1000.0
 	background_copy_number_dictionary["protein_gene_IRF1"] = 100.0
 
 	# =============================== DO NOT EDIT BELOW THIS LINE ============================== #
