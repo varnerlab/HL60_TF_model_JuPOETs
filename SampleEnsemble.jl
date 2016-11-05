@@ -1,51 +1,41 @@
+# include -
 include("Include.jl")
 
-# # Load the ensemble for AhR -
-# time_AhR = [0.0 48.0]
-# (raw_data_AhR,scaled_data_AhR) = process_ensemble_data(time_AhR,38);
-# writedlm("./plot/scaled_data_AhR.dat",scaled_data_AhR);
-#
-# # Load the ensemble for CD38 -
-# time_CD38 = [0.0 24.0 48.0 72.0]
-# (raw_data_CD38,scaled_data_CD38) = process_ensemble_data(time_CD38,41);
-# writedlm("./plot/scaled_data_CD38.dat",scaled_data_CD38);
-#
-# # Load the ensemble for CD11b -
-# time_CD11b = [0.0 24.0 48.0 72.0]
-# (raw_data_CD11b,scaled_data_CD11b) = process_ensemble_data(time_CD11b,39);
-# writedlm("./plot/scaled_data_CD11b.dat",scaled_data_CD11b);
-#
-# # Load the ensemble for P47Phox -
-# time_P47Phox = [0.0 48.0]
-# (raw_data_P47Phox,scaled_data_P47Phox) = process_ensemble_data(time_P47Phox,50);
-# writedlm("./plot/scaled_data_P47Phox.dat",scaled_data_P47Phox);
-#
-# # Load the ensemble for EGR1 -
-# time_EGR1 = [0.0 48.0]
-# (raw_data_EGR1,scaled_data_EGR1) = process_ensemble_data(time_EGR1,44);
-# writedlm("./plot/scaled_data_EGR1.dat",scaled_data_EGR1);
-#
-# # Load the ensemble for IRF1 -
-# time_IRF1 = [0.0 48.0]
-# (raw_data_IRF1,scaled_data_IRF1) = process_ensemble_data(time_IRF1,46);
-# writedlm("./plot/scaled_data_IRF1.dat",scaled_data_IRF1);
-#
-# # Load the ensemble for GIF1 -
-# time_GIF1 = [0.0 48.0]
-# (raw_data_GIF1,scaled_data_GIF1) = process_ensemble_data(time_GIF1,45);
-# writedlm("./plot/scaled_data_GIF1.dat",scaled_data_GIF1);
-#
-# # Load the ensemble for PU1 -
-# time_PU1 = [0.0 48.0]
-# (raw_data_PU1,scaled_data_PU1) = process_ensemble_data(time_PU1,52);
-# writedlm("./plot/scaled_data_PU1.dat",scaled_data_PU1);
+# Load ensemble -
+ensemble_array = readdlm("./simple_ensemble_parameter_sets.dat")
 
-# Load the ensemble for OCT4 -
-time_PU1 = [0.0 48.0]
-(raw_data_OCT4,scaled_data_OCT4) = process_ensemble_data(time_OCT4,48);
-writedlm("./plot/scaled_data_OCT4.dat",scaled_data_OCT4);
+# What is the size of the ensemble?
+[number_of_parameters,number_of_samples] = size(ensemble_array)
 
-# Load the ensemble for CEBPa -
-time_CEBPa = [0.0 48.0]
-(raw_data_PU1,scaled_data_CEBPa) = process_ensemble_data(time_CEBPa,42);
-writedlm("./plot/scaled_data_CEBPa.dat",scaled_data_CEBPa);
+# Last ... run the model w/these sets, save the data -
+for parameter_set_index = 1:number_of_samples
+
+  # sample the ensemble_array -
+  parameter_array = ensemble_array[:,parameter_set_index]
+
+  # Load the data dictionary -
+  data_dictionary = DataDictionary(0.0,0.0,0.0);
+
+  # Update data dictionary to match new parameters before calculating obj
+  parameter_mapping_array = data_dictionary["parameter_name_mapping_array"]
+  for index = 1:length(parameter_mapping_array)
+    if index <= data_dictionary["number_of_binding"]
+      data_dictionary["binding_parameter_dictionary"][parameter_mapping_array[index]] = parameter_array[index]
+    else
+      data_dictionary["control_parameter_dictionary"][parameter_mapping_array[index]] = parameter_array[index]
+    end
+  end
+
+  # Setup the time -
+  time_start = 0.0
+  time_stop = 120.0
+  time_step_size = 0.01
+
+  # Run the simulation -
+  (T,X) = Simulation(time_start,time_stop,time_step_size,data_dictionary);
+
+  # dump data to disk -
+  local_data = [T X];
+  data_filename = "./ensemble/sim_data_EI_"*string(parameter_set_index)*"_LI_"*string(local_index)*".dat"
+  writedlm(data_filename,local_data);
+end
