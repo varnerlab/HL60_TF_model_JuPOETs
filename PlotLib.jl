@@ -1,7 +1,6 @@
-function process_ensemble_data(time_array,species_index)
+function process_ensemble_data(path_to_sim_files,time_array,species_index)
 
   # Load the data from disk -
-  path_to_sim_files = "./ensemble"
   file_extension = ".dat"
   searchdir(path,key) = filter(x->contains(x,key),readdir(path))
 
@@ -15,7 +14,7 @@ function process_ensemble_data(time_array,species_index)
   for (sim_file_index,sim_file) in enumerate(list_of_sim_files)
 
     # path to sim file -
-    sim_file_path = "./ensemble/"*string(sim_file)
+    sim_file_path = "./"*path_to_sim_files*"/"*string(sim_file)
 
     # load the data array -
     simulation_data_array = readdlm(sim_file_path);
