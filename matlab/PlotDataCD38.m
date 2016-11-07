@@ -1,7 +1,7 @@
 % Matlab script to plot data -
 
 % Load the data -
-data_array = load('../plot_best/scaled_data_CD38.dat');
+data_array = load('../plot_simple/scaled_data_CD38.dat');
 
 % Load the measurements -
 measurement_array = load('../data/CD38-WTHL60.txt');
