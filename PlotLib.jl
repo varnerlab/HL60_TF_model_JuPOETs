@@ -1,3 +1,31 @@
+function process_simulation_files(path_to_sim_files)
+
+  # Load the data from disk -
+  file_extension = ".dat"
+  searchdir(path,key) = filter(x->contains(x,key),readdir(path))
+
+  # build src file list -
+  list_of_sim_files = searchdir(path_to_sim_files,file_extension);
+
+  # initialize set -
+  simulation_data_result_set::Set{Array} = Set{Array}()
+
+  # go thru the src file list, and copy the files to the output path -
+  for (sim_file_index,sim_file) in enumerate(list_of_sim_files)
+
+    # path to sim file -
+    sim_file_path = "./"*path_to_sim_files*"/"*string(sim_file)
+
+    # load the data array -
+    simulation_data_array = readdlm(sim_file_path);
+
+    # add to set -
+    push!(simulation_data_result_set,simulation_data_array);
+  end
+
+  return simulation_data_result_set
+end
+
 function process_ensemble_data(path_to_sim_files,time_array,species_index)
 
   # Load the data from disk -

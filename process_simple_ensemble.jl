@@ -52,3 +52,8 @@ writedlm("./plot_simple/scaled_data_OCT4.dat",scaled_data_OCT4);
 time_CEBPa = [0.0 48.0]
 (raw_data_PU1,scaled_data_CEBPa) = process_ensemble_data(path_to_sim_files,time_CEBPa,42);
 writedlm("./plot_simple/scaled_data_CEBPa.dat",scaled_data_CEBPa);
+
+# Load the ensemble for CEBPa -
+time_CEBPa = [0.0 48.0]
+(raw_data_PU1,scaled_data_CEBPa) = process_ensemble_data(path_to_sim_files,time_CEBPa,42);
+writedlm("./plot_simple/scaled_data_CEBPa.dat",scaled_data_CEBPa);
